@@ -31,7 +31,11 @@
             "name": "Linux",
             "includePath": [
                 "/usr/include",
+                "/usr/include/linux",
+                "/usr/include/c++/7.1.1",
+                "/usr/include/c++/7.1.1/bits",
                 "/usr/local/include",
+                "/usr/include/c++/7.1.1/x86_64-pc-linux-gnu",
                 "${workspaceRoot}"
             ],
             "defines": [],
@@ -39,7 +43,10 @@
             "browse": {
                 "path": [
                     "/usr/include",
+                    "/usr/include/c++/7.1.1",
                     "/usr/local/include",
+                     "/usr/include/c++/7.1.1/bits",
+                    "/usr/include/c++/7.1.1/x86_64-pc-linux-gnu",
                     "${workspaceRoot}"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
