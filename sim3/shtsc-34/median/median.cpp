@@ -3,34 +3,37 @@
 
 using namespace std;
 
-int a[100010], L[200010], R[200010];
+const int maxn = 100000;
+
+int buf[maxn * 2 + 1];
+int *cnt = buf + maxn;
 
 int main() {
-    freopen("brike.in", "r", stdin);
-    freopen("brike.out", "w", stdout);
-    int n, b, num, ans;
+    freopen("median.in", "r", stdin);
+    freopen("median.out", "w", stdout);
+    int n, b;
     cin >> n >> b;
-    for (int i = 1; i <= n; i++) {
-        scanf("%d", &a[i]);
-        if (a[i] == b) {
-            num = i;
-            a[i] = 0;
-            continue;
+    long long ans = 0;
+    bool flag = false;
+    int sum = 0;
+    cnt[0] = 1;
+    while (n--) {
+        int a;
+        cin >> a;
+        if (a == b) {
+            flag = true;
+        } else if (a < b) {
+            sum--;
+        } else if (a > b) {
+            sum++;
         }
-        if (a[i] > b)
-            a[i] = 1;
-        else
-            a[i] = -1;
+        if (!flag) {
+            cnt[sum]++;
+        } else {
+            ans += cnt[sum];
+        }
     }
-    int l = n, r = n;
-    for (int i = num; i > 0; --i)
-        l += a[i], L[l]++;
-    for (int i = num; i <= n; ++i)
-        r += a[i], R[r]++;
-    int len = 2 * n;
-    for (int i = 0; i <= len; ++i)
-        ans += (L[i] * R[len - i]);
-    printf("%d\n", ans);
+    cout << ans << endl;
     fclose(stdin);
     fclose(stdout);
     return 0;
