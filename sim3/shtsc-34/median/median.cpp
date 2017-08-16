@@ -6,6 +6,8 @@ using namespace std;
 int a[100010], L[200010], R[200010];
 
 int main() {
+    freopen("brike.in", "r", stdin);
+    freopen("brike.out", "w", stdout);
     int n, b, num, ans;
     cin >> n >> b;
     for (int i = 1; i <= n; i++) {
@@ -29,5 +31,7 @@ int main() {
     for (int i = 0; i <= len; ++i)
         ans += (L[i] * R[len - i]);
     printf("%d\n", ans);
+    fclose(stdin);
+    fclose(stdout);
     return 0;
 }
