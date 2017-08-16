@@ -57,7 +57,15 @@
             "name": "Win32",
             "includePath": [
                 "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include",
+                "C:/Dev-Cpp/include",
+                "C:/Dev-Cpp/include/c++/3.4.2",
+                "C:/Dev-Cpp/include/c++/3.4.2/bits",
+                "C:/Dev-Cpp/include/c++/3.4.2/ext",
+                "C:/Dev-Cpp/include/stddef.h",
+                "C:/Dev-Cpp/include/c++/3.4.2/mingw32",
+                "C:/cygwin64/lib/gcc/x86_64-pc-cygwin/5.4.0/include",
                 "${workspaceRoot}"
+
             ],
             "defines": [
                 "_DEBUG",
