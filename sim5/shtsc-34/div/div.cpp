@@ -12,7 +12,7 @@ int a[210], num[210];
 int n;
 
 inline void find(int x) {
-    for (int i = 1; i * i <= x; ++i)
+    for (int i = 1; i * i <= x; ++i) {
         if (x % i == 0) {
             int t = x / i;
             if (mp[i])
@@ -24,6 +24,7 @@ inline void find(int x) {
                 mp[t]++, num[mp[t]]++;
             }
         }
+    }
 }
 
 int main() {
