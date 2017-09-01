@@ -1,0 +1,6 @@
+#include <iostream>#include <deque>#include <vector>
+using namespace std;const int maxn = 200010;const int mask = 1 << 20;int v[maxn];int d[maxn + mask];vector<int> W[maxn + mask], G[maxn + mask];deque<int> q;
+int main() {  int n, m;  cin >> n >> m;  for (int i = 1; i <= n; i++) {    cin >> v[i];    G[i].push_back(n + 1 + v[i]);        W[n + 1 + v[i]].push_back(i);  }
+  for (int i = 0; i < (1 << 20); i++) {    for (int j = 0; j < 20; j++) {      int mask = 1 << j;        if ((i & mask) != 0 ) {         G[n + 1 + i].push_back(n + 1 + i - mask);      }    }        }
+  while (m-->0) {    int u, v;    cin >> u >> v;    W[u].push_back(v);      }
+  d[1] = 1;  q.push_back(1);  while (!q.empty()) {    int u = q.front();   // cerr << u << d[u] << endl;    q.pop_front();    for (int i = 0; i < G[u].size(); i++) {      int v = G[u][i];      if (d[v] == 0 || d[v] > d[u]) {        d[v] = d[u];        q.push_front(v);      }            }       for (int i = 0; i < W[u].size(); i++) {      int v = W[u][i];      if (d[v] == 0) {        d[v] = d[u] + 1;        q.push_back(v);      }            }     }    //  cerr << "fuck" << endl;  for (int i = 1; i <= n; i++) {    cout << d[i] - 1 << endl;  }   cin >> n;} // 5 2 5 4 2 3 7 1 4 2 3
