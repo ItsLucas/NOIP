@@ -26,6 +26,9 @@ int main() {
             cin >> x;
             if (!m.count(x))
                 m[x] = i;
+            // Why NOIP doesn't allow C++11?
+            // for (auto it : m)
+            // Much better, right?
             for (map<ll, ll>::iterator it = m.begin(); it != m.end();) {
                 ll t = gcd(x, it->first);
                 ans = max(ans, t * (i - it->second + 1));
