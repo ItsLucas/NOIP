@@ -57,6 +57,9 @@
             "name": "Win32",
             "includePath": [
                 "C:/cygwin64/usr/include/*",
+                "C:/Users/Lucas/Desktop/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include",
+                "C:/Users/Lucas/Desktop/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++",
+                "C:/Users/Lucas/Desktop/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/x86_64-w64-mingw32/32",
                 "${workspaceRoot}"
 
             ],
