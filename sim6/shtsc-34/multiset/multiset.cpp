@@ -20,37 +20,33 @@ struct card {
 int main() {
     freopen("multiset.in", "r", stdin);
     freopen("multiset.out", "w", stdout);
-    int t;
-    scnaf("%d", &t);
-    while (t--) {
-        int n;
-        scanf("%d", &n);
-        for (int i = 0; i < n; i++) {
-            scanf("%d %d", &a[i].w, &a[i].h);
-        }
-        for (int i = 0; i < n; i++) {
-            scanf("%d %d", &b[i].w, &b[i].h);
-        }
-        sort(a, a + n);
-        sort(b, b + n);
-        multiset<int> s;
-        int k = 0, ans = 0;
-        for (int i = 0; i < n; i++) {
-            while (k < n && B[k].w <= A[i].w)
-                s.insert(B[k++].h);
-            if (s.empty())
-                continue;
-            // Why NOIP doesn't allow C++11?
-            // auto it = s.upper_bound(a[i].h)
-            // Much better, right?
-            multiset<int>::iterator it = s.upper_bound(a[i].h);
-            if (it != s.begin()) {
-                ans++;
-                s.erase(--it);
-            }
-        }
-        printf("%d\n", ans);
+    int n;
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d %d", &a[i].w, &a[i].h);
     }
+    for (int i = 0; i < n; i++) {
+        scanf("%d %d", &b[i].w, &b[i].h);
+    }
+    sort(a, a + n);
+    sort(b, b + n);
+    multiset<int> s;
+    int k = 0, ans = 0;
+    for (int i = 0; i < n; i++) {
+        while (k < n && b[k].w <= a[i].w)
+            s.insert(b[k++].h);
+        if (s.empty())
+            continue;
+        // Why NOIP doesn't allow C++11?
+        // auto it = s.upper_bound(a[i].h)
+        // Much better, right?
+        multiset<int>::iterator it = s.upper_bound(a[i].h);
+        if (it != s.begin()) {
+            ans++;
+            s.erase(--it);
+        }
+    }
+    printf("%d\n", ans);
     fclose(stdin);
     fclose(stdout);
     return 0;
