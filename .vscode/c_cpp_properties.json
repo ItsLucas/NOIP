@@ -25,17 +25,21 @@
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
-            }
+            },
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ]
         },
         {
             "name": "Linux",
             "includePath": [
                 "/usr/include",
                 "/usr/include/linux",
-                "/usr/include/c++/7.1.1",
-                "/usr/include/c++/7.1.1/bits",
+                "/usr/include/c++/7.2.0",
+                "/usr/include/c++/7.2.0/bits",
                 "/usr/local/include",
-                "/usr/include/c++/7.1.1/x86_64-pc-linux-gnu",
+                "/usr/include/c++/7.2.0/x86_64-pc-linux-gnu",
                 "${workspaceRoot}"
             ],
             "defines": [],
@@ -45,7 +49,7 @@
                     "/usr/include",
                     "/usr/include/c++/7.1.1",
                     "/usr/local/include",
-                     "/usr/include/c++/7.1.1/bits",
+                    "/usr/include/c++/7.1.1/bits",
                     "/usr/include/c++/7.1.1/x86_64-pc-linux-gnu",
                     "${workspaceRoot}"
                 ],
@@ -61,7 +65,6 @@
                 "C:/Users/Lucas/Desktop/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++",
                 "C:/Users/Lucas/Desktop/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/x86_64-w64-mingw32/32",
                 "${workspaceRoot}"
-
             ],
             "defines": [
                 "_DEBUG",
@@ -78,5 +81,5 @@
             }
         }
     ],
-    "version": 2
+    "version": 3
 }
