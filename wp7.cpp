@@ -15,7 +15,7 @@ FILE *fp;
 int main() {
     fp = fopen("MathPic.ppm", "wb");
     fprintf(fp, "P6\n%d %d\n255\n", DIM, DMI);
-    for (int j = 0; j < DIM; j++)
+    for (int j = 0; j < DMI; j++)
         for (int i = 0; i < DIM; i++)
             pixel_write(i, j);
     fclose(fp);
