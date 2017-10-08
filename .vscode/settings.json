@@ -40,6 +40,8 @@
         "stdexcept": "cpp",
         "system_error": "cpp",
         "tuple": "cpp",
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "future": "cpp",
+        "rope": "cpp"
     }
 }
