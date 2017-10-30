@@ -26,6 +26,10 @@ int dfs(int u, int fa) {
     }
 }
 
+inline int exgcd(int a,int b, ll &x,ll &y) {
+    
+}
+
 int main() {
     int n, u, v;
     cin >> n;
@@ -34,4 +38,5 @@ int main() {
         add(u, v);
     }
     dfs(1, 0);
+
 }
