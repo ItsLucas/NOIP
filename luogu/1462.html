@@ -1,0 +1,99 @@
+<!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;algorithm&gt;</font>
+<b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;cstdio&gt;</font>
+<b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+<b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;queue&gt;</font>
+<b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;vector&gt;</font>
+
+<b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+
+<b><font color="#0000FF">struct</font></b> <font color="#008080">node</font> <font color="#FF0000">{</font>
+    <font color="#009900">int</font> v<font color="#990000">,</font> w<font color="#990000">;</font>
+    <b><font color="#000000">node</font></b><font color="#990000">(</font><font color="#009900">int</font> v <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">,</font> <font color="#009900">int</font> w <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">)</font> <font color="#990000">:</font> <b><font color="#000000">v</font></b><font color="#990000">(</font>v<font color="#990000">),</font> <b><font color="#000000">w</font></b><font color="#990000">(</font>w<font color="#990000">)</font><font color="#FF0000">{}</font><font color="#990000">;</font>
+    <font color="#009900">bool</font> <b><font color="#0000FF">operator</font></b><font color="#990000">&lt;(</font><b><font color="#0000FF">const</font></b> <font color="#008080">node</font> <font color="#990000">&amp;</font>a<font color="#990000">)</font> <b><font color="#0000FF">const</font></b> <font color="#FF0000">{</font> <b><font color="#0000FF">return</font></b> w <font color="#990000">&gt;</font> a<font color="#990000">.</font>w<font color="#990000">;</font> <font color="#FF0000">}</font>
+<font color="#FF0000">}</font><font color="#990000">;</font>
+
+<b><font color="#0000FF">const</font></b> <font color="#009900">int</font> maxn <font color="#990000">=</font> <font color="#993399">20001</font><font color="#990000">;</font>
+<b><font color="#0000FF">const</font></b> <font color="#009900">int</font> INF <font color="#990000">=</font> <font color="#993399">0x6f6f6f6f</font><font color="#990000">;</font>
+
+<font color="#008080">vector&lt;node&gt;</font> G<font color="#990000">[</font>maxn<font color="#990000">];</font>
+<font color="#009900">bool</font> vis<font color="#990000">[</font>maxn<font color="#990000">];</font>
+<font color="#009900">int</font> dis<font color="#990000">[</font>maxn<font color="#990000">];</font>
+<font color="#009900">int</font> f<font color="#990000">[</font>maxn<font color="#990000">];</font>
+<font color="#009900">int</font> n<font color="#990000">,</font> b<font color="#990000">;</font>
+
+<b><font color="#0000FF">inline</font></b> <font color="#009900">void</font> <b><font color="#000000">add</font></b><font color="#990000">(</font><font color="#009900">int</font> u<font color="#990000">,</font> <font color="#009900">int</font> v<font color="#990000">,</font> <font color="#009900">int</font> w<font color="#990000">)</font> <font color="#FF0000">{</font> G<font color="#990000">[</font>u<font color="#990000">].</font><b><font color="#000000">push_back</font></b><font color="#990000">(</font><b><font color="#000000">node</font></b><font color="#990000">(</font>v<font color="#990000">,</font> w<font color="#990000">));</font> <font color="#FF0000">}</font>
+
+<font color="#009900">void</font> <b><font color="#000000">init</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font> i <font color="#990000">&lt;</font> maxn<font color="#990000">;</font> i<font color="#990000">++)</font> <font color="#FF0000">{</font>
+        G<font color="#990000">[</font>i<font color="#990000">].</font><b><font color="#000000">clear</font></b><font color="#990000">();</font>
+        vis<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">=</font> <b><font color="#0000FF">false</font></b><font color="#990000">;</font>
+        dis<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">=</font> INF<font color="#990000">;</font>
+    <font color="#FF0000">}</font>
+<font color="#FF0000">}</font>
+
+<font color="#009900">bool</font> <b><font color="#000000">dijkstra</font></b><font color="#990000">(</font><font color="#009900">int</font> x<font color="#990000">)</font> <font color="#FF0000">{</font>
+    <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>x <font color="#990000">&lt;</font> f<font color="#990000">[</font><font color="#993399">1</font><font color="#990000">]</font> <font color="#990000">||</font> x <font color="#990000">&lt;</font> f<font color="#990000">[</font>n<font color="#990000">])</font>
+        <b><font color="#0000FF">return</font></b> <b><font color="#0000FF">false</font></b><font color="#990000">;</font>
+    <font color="#009900">int</font> i<font color="#990000">;</font>
+    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font>i <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font> i <font color="#990000">&lt;=</font> n<font color="#990000">;</font> i<font color="#990000">++)</font>
+        dis<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">=</font> INF<font color="#990000">;</font>
+    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font>i <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font> i <font color="#990000">&lt;=</font> n<font color="#990000">;</font> i<font color="#990000">++)</font>
+        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>f<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">&gt;</font> x<font color="#990000">)</font>
+            vis<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">=</font> <b><font color="#0000FF">true</font></b><font color="#990000">;</font>
+        <b><font color="#0000FF">else</font></b>
+            vis<font color="#990000">[</font>i<font color="#990000">]</font> <font color="#990000">=</font> <b><font color="#0000FF">false</font></b><font color="#990000">;</font>
+    <font color="#008080">priority_queue&lt;node&gt;</font> Q<font color="#990000">;</font>
+    Q<font color="#990000">.</font><b><font color="#000000">push</font></b><font color="#990000">(</font><b><font color="#000000">node</font></b><font color="#990000">(</font><font color="#993399">1</font><font color="#990000">,</font> <font color="#993399">0</font><font color="#990000">));</font>
+    dis<font color="#990000">[</font><font color="#993399">1</font><font color="#990000">]</font> <font color="#990000">=</font> <font color="#993399">0</font><font color="#990000">;</font>
+    <b><font color="#0000FF">while</font></b> <font color="#990000">(!</font>Q<font color="#990000">.</font><b><font color="#000000">empty</font></b><font color="#990000">())</font> <font color="#FF0000">{</font>
+        <font color="#008080">node</font> now <font color="#990000">=</font> Q<font color="#990000">.</font><b><font color="#000000">top</font></b><font color="#990000">();</font>
+        Q<font color="#990000">.</font><b><font color="#000000">pop</font></b><font color="#990000">();</font>
+        <font color="#009900">int</font> v <font color="#990000">=</font> now<font color="#990000">.</font>v<font color="#990000">;</font>
+        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font>vis<font color="#990000">[</font>v<font color="#990000">])</font>
+            <b><font color="#0000FF">continue</font></b><font color="#990000">;</font>
+        vis<font color="#990000">[</font>v<font color="#990000">]</font> <font color="#990000">=</font> <b><font color="#0000FF">true</font></b><font color="#990000">;</font>
+        <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#008080">node</font> i <font color="#990000">:</font> G<font color="#990000">[</font>v<font color="#990000">])</font> <font color="#FF0000">{</font>
+            <font color="#009900">int</font> v2 <font color="#990000">=</font> i<font color="#990000">.</font>v<font color="#990000">;</font>
+            <font color="#009900">int</font> len <font color="#990000">=</font> i<font color="#990000">.</font>w<font color="#990000">;</font>
+            <b><font color="#0000FF">if</font></b> <font color="#990000">(!</font>vis<font color="#990000">[</font>v2<font color="#990000">]</font> <font color="#990000">&amp;&amp;</font> dis<font color="#990000">[</font>v2<font color="#990000">]</font> <font color="#990000">&gt;</font> dis<font color="#990000">[</font>v<font color="#990000">]</font> <font color="#990000">+</font> len<font color="#990000">)</font> <font color="#FF0000">{</font>
+                dis<font color="#990000">[</font>v2<font color="#990000">]</font> <font color="#990000">=</font> dis<font color="#990000">[</font>v<font color="#990000">]</font> <font color="#990000">+</font> len<font color="#990000">;</font>
+                Q<font color="#990000">.</font><b><font color="#000000">push</font></b><font color="#990000">(</font><b><font color="#000000">node</font></b><font color="#990000">(</font>v2<font color="#990000">,</font> dis<font color="#990000">[</font>v2<font color="#990000">]));</font>
+            <font color="#FF0000">}</font>
+        <font color="#FF0000">}</font>
+    <font color="#FF0000">}</font>
+    <b><font color="#0000FF">return</font></b> dis<font color="#990000">[</font>n<font color="#990000">]</font> <font color="#990000">&lt;</font> b<font color="#990000">;</font>
+<font color="#FF0000">}</font>
+
+<font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+    <b><font color="#000000">init</font></b><font color="#990000">();</font>
+    <font color="#009900">int</font> m<font color="#990000">,</font> u<font color="#990000">,</font> v<font color="#990000">,</font> w<font color="#990000">;</font>
+    cin <font color="#990000">&gt;&gt;</font> n <font color="#990000">&gt;&gt;</font> m <font color="#990000">&gt;&gt;</font> b<font color="#990000">;</font>
+    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font> i <font color="#990000">&lt;=</font> n<font color="#990000">;</font> i<font color="#990000">++)</font> <font color="#FF0000">{</font>
+        <b><font color="#000000">scanf</font></b><font color="#990000">(</font><font color="#FF0000">"%d"</font><font color="#990000">,</font> <font color="#990000">&amp;</font>f<font color="#990000">[</font>i<font color="#990000">]);</font>
+    <font color="#FF0000">}</font>
+    <b><font color="#0000FF">for</font></b> <font color="#990000">(</font><font color="#009900">int</font> i <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">;</font> i <font color="#990000">&lt;=</font> n<font color="#990000">;</font> i<font color="#990000">++)</font> <font color="#FF0000">{</font>
+        <b><font color="#000000">scanf</font></b><font color="#990000">(</font><font color="#FF0000">"%d %d %d"</font><font color="#990000">,</font> <font color="#990000">&amp;</font>u<font color="#990000">,</font> <font color="#990000">&amp;</font>v<font color="#990000">,</font> <font color="#990000">&amp;</font>w<font color="#990000">);</font>
+        <b><font color="#000000">add</font></b><font color="#990000">(</font>u<font color="#990000">,</font> v<font color="#990000">,</font> w<font color="#990000">);</font>
+        <b><font color="#000000">add</font></b><font color="#990000">(</font>v<font color="#990000">,</font> u<font color="#990000">,</font> w<font color="#990000">);</font>
+    <font color="#FF0000">}</font>
+    <font color="#009900">int</font> l <font color="#990000">=</font> <font color="#993399">1</font><font color="#990000">,</font> r <font color="#990000">=</font> n<font color="#990000">,</font> mid<font color="#990000">;</font>
+    <b><font color="#0000FF">if</font></b> <font color="#990000">(!</font><b><font color="#000000">dijkstra</font></b><font color="#990000">(</font>f<font color="#990000">[</font>n<font color="#990000">]))</font> <font color="#FF0000">{</font>
+        <b><font color="#000000">printf</font></b><font color="#990000">(</font><font color="#FF0000">"AFK</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">);</font>
+        <b><font color="#0000FF">return</font></b> <font color="#993399">0</font><font color="#990000">;</font>
+    <font color="#FF0000">}</font>
+    <font color="#009900">int</font> ans <font color="#990000">=</font> f<font color="#990000">[</font>n<font color="#990000">];</font>
+    <b><font color="#0000FF">while</font></b> <font color="#990000">(</font>l <font color="#990000">&lt;=</font> r<font color="#990000">)</font> <font color="#FF0000">{</font>
+        mid <font color="#990000">=</font> <font color="#990000">(</font>l <font color="#990000">+</font> r<font color="#990000">)</font> <font color="#990000">&gt;&gt;</font> <font color="#993399">1</font><font color="#990000">;</font>
+        <b><font color="#0000FF">if</font></b> <font color="#990000">(</font><b><font color="#000000">dijkstra</font></b><font color="#990000">(</font>f<font color="#990000">[</font>mid<font color="#990000">]))</font> <font color="#FF0000">{</font>
+            ans <font color="#990000">=</font> f<font color="#990000">[</font>mid<font color="#990000">];</font>
+            r <font color="#990000">=</font> mid <font color="#990000">-</font> <font color="#993399">1</font><font color="#990000">;</font>
+        <font color="#FF0000">}</font> <b><font color="#0000FF">else</font></b>
+            l <font color="#990000">=</font> mid <font color="#990000">+</font> <font color="#993399">1</font><font color="#990000">;</font>
+    <font color="#FF0000">}</font>
+    <b><font color="#000000">printf</font></b><font color="#990000">(</font><font color="#FF0000">"%d</font><font color="#CC33CC">\n</font><font color="#FF0000">"</font><font color="#990000">,</font> ans<font color="#990000">);</font>
+    <b><font color="#0000FF">return</font></b> <font color="#993399">0</font><font color="#990000">;</font>
+<font color="#FF0000">}</font></tt></pre>
