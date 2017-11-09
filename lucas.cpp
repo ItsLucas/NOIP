@@ -18,13 +18,6 @@ vector<node> G[maxn];
 bool vis[maxn];
 int dis[maxn];
 
-void init() {
-    for (int i = 0; i < maxn; i++) {
-        G[i].clear();
-        vis[i] = false;
-        dis[i] = INF;
-    }
-}
 int dijkstra(int s, int e) {
     priority_queue<node> Q;
     Q.push(node(s, 0)); //  加入队列并排序
